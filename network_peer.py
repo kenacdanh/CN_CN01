@@ -54,7 +54,7 @@ class tkinterApp(tk.Tk):
             # for loop
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
-            frame.configure(bg='white')
+            frame.configure(bg='#1E1E1E')
         self.show_frame(StartPage)
 
     # to display the current frame passed as
@@ -66,28 +66,30 @@ class tkinterApp(tk.Tk):
 
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent, bg='#1E1E1E')  # Set background color for the entire frame
 
-        tk.Label(self, text="Welcome to WeChat", bg="#bf8bff", fg="white",
+        tk.Label(self, text="Welcome to WeChat", bg='#1E1E1E', fg='#00FF00',  # Green text and background
                  height="2", font=("Verdana", 13)).pack(fill='x')
-        tk.Label(self, text="", bg='white').pack()
+        tk.Label(self, text="", bg='#1E1E1E').pack()  # Set background color for space
 
         # Set port label
-        tk.Label(self, text="Set Port (1 -> 9999)", bg='white').pack()
+        tk.Label(self, text="Set Port (1 -> 9999)", bg='#1E1E1E', fg='#00FF00', font=("Courier New", 11)).pack()  # Green text and background
         # Set port entry
         self.port_entry = tk.Entry(
-            self, width="20", font=("Verdana", 11))
+            self, width="20", font=("Courier New", 11), fg='#00FF00', bg='#1E1E1E', insertbackground='#00FF00')  # Green text, background, and insertion cursor
         self.port_entry.pack()
-        tk.Label(self, text="", bg='white').pack()
+        tk.Label(self, text="", bg='#1E1E1E').pack()  # Set background color for space
 
-        # create a register button
-        tk.Button(self, text="Register", height="2", width="30", bg="#5D0CB5", fg="white", command=lambda: self.enter_app(
-            controller=controller, port=self.port_entry.get(), page=RegisterPage)).pack()
-        tk.Label(self, text="", bg='white').pack()
+        # Create a register button
+        tk.Button(self, text="Register", height="2", width="30", bg='#1E1E1E', fg='#00FF00', border=0,
+                  font=("Courier New", 11), command=lambda: self.enter_app(
+            controller=controller, port=self.port_entry.get(), page=RegisterPage)).pack()  # Green text and background
+        tk.Label(self, text="", bg='#1E1E1E').pack()  # Set background color for space
 
-        # create a login button
-        tk.Button(self, text="Login", height="2", width="30", bg="#A021E2", fg="white", command=lambda: self.enter_app(
-            controller=controller, port=self.port_entry.get(), page=LoginPage)).pack()
+        # Create a login button
+        tk.Button(self, text="Login", height="2", width="30", bg='#1E1E1E', fg='#00FF00', border=0,
+                  font=("Courier New", 11), command=lambda: self.enter_app(
+            controller=controller, port=self.port_entry.get(), page=LoginPage)).pack()  # Green text and background
 
     def enter_app(self, controller, port, page):
         try:
@@ -120,37 +122,30 @@ class RegisterPage(tk.Frame):
 
         # Sign Up Image
         signup_pic = ImageTk.PhotoImage(asset.signup_image)
-        signupImg = tk.Label(self, image=signup_pic, bg='white')
+        signupImg = tk.Label(self, image=signup_pic, bg='#1E1E1E')
         signupImg.image = signup_pic
         signupImg.place(x=50, y=50)
 
         # Title
-        tk.Label(self, text='Sign Up',
-                 fg='#bf8bff', bg='white',
-                 font=("Roboto", 24, 'bold')).place(x=670, y=100)
+        tk.Label(self, text='Sign Up', fg='#00FF00', bg='#1E1E1E', font=("Courier New", 24, 'bold')).place(x=670, y=100)
         # Username
-        tk.Label(self, text='Username', bg='white',
-                 fg='#57a1f8', font=("Roboto", 11)).place(x=670, y=175)
-        self.username_entry = tk.Entry(self, width=25, fg='black', border=0,
-                                       bg='white', font=("Roboto", 10))
+        tk.Label(self, text='Username', bg='#1E1E1E', fg='#00FF00', font=("Courier New", 11)).place(x=670, y=175)
+        self.username_entry = tk.Entry(self, width=25, fg='#00FF00', border=0,
+                                       bg='#1E1E1E', font=("Courier New", 10), insertbackground='#00FF00')
         self.username_entry.place(x=675, y=200)
         tk.Frame(self, width=275, height=2, bg='#777777').place(x=675, y=225)
 
         # Password
-        tk.Label(self, text='Password', bg='white',
-                 fg='#57a1f8', font=("Roboto", 11)).place(x=670, y=250)
-        self.password_entry = tk.Entry(self, width=25, fg='black', border=0,
-                                       bg='white', font=("Roboto", 10), show='*')
+        tk.Label(self, text='Password', bg='#1E1E1E', fg='#00FF00', font=("Courier New", 11)).place(x=670, y=250)
+        self.password_entry = tk.Entry(self, width=25, fg='#00FF00', border=0,
+                                       bg='#1E1E1E', font=("Courier New", 10), show='*', insertbackground='#00FF00')
         self.password_entry.place(x=675, y=275)
         tk.Frame(self, width=275, height=2, bg='#777777').place(x=675, y=300)
 
         # Submit
-        tk.Button(self, width=39, pady=7, text='Sign Up', bg='#bf8bff',
-                  fg='white', border=0, command=lambda: self.register_user(self.username_entry.get(), self.password_entry.get())).place(x=675, y=325)
-        tk.Label(self, text="Already have an account ?",
-                 fg='black', bg='white', font=("Roboto", 10)).place(x=675, y=375)
-        tk.Button(self, width=6, text='Sign in', border=0,
-                  bg='white', cursor='hand2', fg='#57a1f8', command=lambda: controller.show_frame(LoginPage)).place(x=670, y=400)
+        tk.Button(self, width=39, pady=7, text='Sign Up', bg='#1E1E1E', fg='#00FF00', border=0, command=lambda: self.register_user(self.username_entry.get(), self.password_entry.get())).place(x=675, y=325)
+        tk.Label(self, text="Already have an account ?", fg='#00FF00', bg='#1E1E1E', font=("Courier New", 10)).place(x=675, y=375)
+        tk.Button(self, width=6, text='Sign in', border=0, bg='#1E1E1E', cursor='hand2', fg='#00FF00', command=lambda: controller.show_frame(LoginPage)).place(x=670, y=400)
 
     def register_user(self, username, password):
         network_peer.name = str(username)
@@ -166,38 +161,31 @@ class LoginPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         # Login Image
         login_pic = ImageTk.PhotoImage(asset.login_image)
-        loginImg = tk.Label(self, image=login_pic, bg='white')
+        loginImg = tk.Label(self, image=login_pic, bg='#1E1E1E')
         loginImg.image = login_pic
         loginImg.place(x=50, y=50)
 
         # Title
-        tk.Label(self, text='Login',
-                 fg='#bf8bff', bg='white',
-                 font=("Roboto", 24, 'bold')).place(x=670, y=100)
+        tk.Label(self, text='Login', fg='#00FF00', bg='#1E1E1E', font=("Courier New", 24, 'bold')).place(x=670, y=100)
 
-        # Username
-        tk.Label(self, text='Username', bg='white',
-                 fg='#57a1f8', font=("Roboto", 11)).place(x=670, y=175)
-        self.username_entry = tk.Entry(self, width=25, fg='black', border=0,
-                                       bg='white', font=("Roboto", 10))
+         # Username
+        tk.Label(self, text='Username', bg='#1E1E1E', fg='#00FF00', font=("Courier New", 11)).place(x=670, y=175)
+        self.username_entry = tk.Entry(self, width=25, fg='#00FF00', border=0,
+                                       bg='#1E1E1E', font=("Courier New", 10), insertbackground='#00FF00')
         self.username_entry.place(x=675, y=200)
         tk.Frame(self, width=275, height=2, bg='#777777').place(x=675, y=225)
 
         # Password
-        tk.Label(self, text='Password', bg='white',
-                 fg='#57a1f8', font=("Roboto", 11)).place(x=670, y=250)
-        self.password_entry = tk.Entry(self, width=25, fg='black', border=0,
-                                       bg='white', font=("Roboto", 10), show='*')
+        tk.Label(self, text='Password', bg='#1E1E1E', fg='#00FF00', font=("Courier New", 11)).place(x=670, y=250)
+        self.password_entry = tk.Entry(self, width=25, fg='#00FF00', border=0,
+                                       bg='#1E1E1E', font=("Courier New", 10), show='*', insertbackground='#00FF00')
         self.password_entry.place(x=675, y=275)
         tk.Frame(self, width=275, height=2, bg='#777777').place(x=675, y=300)
 
         # Submit
-        tk.Button(self, width=39, pady=7, text='Login', bg='#bf8bff',
-                  fg='white', border=0, command=lambda: self.login_user(username=self.username_entry.get(), password=self.password_entry.get())).place(x=675, y=325)
-        tk.Label(self, text="Don't have an account ?",
-                 fg='black', bg='white', font=("Roboto", 10)).place(x=675, y=375)
-        tk.Button(self, width=6, text='Sign up', border=0,
-                  bg='white', cursor='hand2', fg='#57a1f8', command=lambda: controller.show_frame(RegisterPage)).place(x=670, y=400)
+        tk.Button(self, width=39, pady=7, text='Login', bg='#1E1E1E', fg='#00FF00', border=0, command=lambda: self.login_user(username=self.username_entry.get(), password=self.password_entry.get())).place(x=675, y=325)
+        tk.Label(self, text="Don't have an account ?", fg='#00FF00', bg='#1E1E1E', font=("Courier New", 10)).place(x=675, y=375)
+        tk.Button(self, width=6, text='Sign up', border=0, bg='#1E1E1E', cursor='hand2', fg='#00FF00', command=lambda: controller.show_frame(RegisterPage)).place(x=670, y=400)
 
     def login_user(self, username, password):
         network_peer.name = str(username)
