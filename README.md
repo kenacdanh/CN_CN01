@@ -1,14 +1,14 @@
-# P2P_Private_Chat_CO3094
-Computer Network Project Semester 221.
+# P2P_Share File CO3094
+Computer Network Project Semester 231.
 
 ## Start server (backend)
 
 ```bash
-$ python run central_server.py
+$ python .\central_server.py
 ```
 
 ## Run the app (frontend)
 
 ```bash
-$ python run network_peer.py
+$ python .\network_peer.py
 ```
