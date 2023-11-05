@@ -5,8 +5,10 @@ import threading
 import time
 import random
 from base import Base
+import sqlite3
 
 # GUI
+from tkinter import ttk
 import tkinter as tk
 import tkinter.messagebox
 import tkinter.filedialog
@@ -20,7 +22,7 @@ import asset
 FORMAT = "utf-8"
 BUFFER_SIZE = 2048
 OFFSET = 10000
-
+directory_path_sharefile = "fileshare/"
 ## ====================GUI IMPLEMENT======================##
 
 
@@ -368,6 +370,18 @@ class PrivateChatPage(tk.Frame):
         chatroom_button.image = chatroom_icon
         chatroom_button.grid(row=0, column=2, columnspan=3, sticky="news")
 
+        public_icon = ImageTk.PhotoImage(asset.public_icon)
+        public_icon_button = tk.Button(
+            self,
+            image=public_icon,
+            border=0,
+            background="#573d9c",
+            activebackground="#573d9c",
+            command=lambda: self.sendPublicFile(directory_path_sharefile),
+        )
+        public_icon_button.image = public_icon
+        public_icon_button.grid(row=0, column=1, columnspan=1, sticky="news")
+
         self.message_area = tk.Text(
             self,
             bg="#f2f0f6",
@@ -545,6 +559,70 @@ class PrivateChatPage(tk.Frame):
         snd = threading.Thread(target=network_peer.sendPublicMessage, args=(self.msg,))
         snd.daemon = True
         snd.start()
+
+    def sendPublicFile(self, directory_path_sharefile):
+        def close_window():
+            conn.close()
+            sharefile.destroy()
+
+        # Kết nối hoặc tạo cơ sở dữ liệu SQLite3
+        conn = sqlite3.connect("publicfile.db")
+        cursor = conn.cursor()
+
+        # Tạo bảng nếu nó chưa tồn tại
+        cursor.execute(
+            """
+            CREATE TABLE IF NOT EXISTS public_files (
+                NAME TEXT,
+                filename TEXT,
+                PRIMARY KEY (NAME, filename),
+                FOREIGN KEY (NAME) REFERENCES users(NAME)
+            )
+        """
+        )
+        conn.commit()
+
+        # Tạo danh sách tệp từ thư mục chỉ định
+        file_list = os.listdir(directory_path_sharefile)
+
+        # Lưu tên tệp vào cơ sở dữ liệu và bỏ qua nếu đã tồn tại
+        for filename in file_list:
+            try:
+                cursor.execute(
+                    "INSERT INTO public_files (NAME, filename) VALUES (?, ?)",
+                    ("thuc", filename),
+                )
+                conn.commit()
+            except sqlite3.IntegrityError:
+                pass
+
+        # Tạo giao diện Tkinter
+        sharefile = tk.Tk()
+        sharefile.title("Public Files")
+
+        # Tạo một frame để hiển thị bảng
+        table_frame = tk.Frame(sharefile)
+        table_frame.pack()
+
+        # Tạo một Treeview để hiển thị dữ liệu từ cơ sở dữ liệu
+        tree = ttk.Treeview(table_frame, columns=["Name", "Filename"], show="headings")
+        tree.pack()
+
+        tree.heading("Name", text="Name")
+        tree.heading("Filename", text="Filename")
+        tree.column("Name", width=100)
+        tree.column("Filename", width=300)
+
+        # Truy vấn cơ sở dữ liệu để lấy danh sách tên tệp và tên người dùng
+        cursor.execute("SELECT NAME, filename FROM public_files")
+        data = cursor.fetchall()
+
+        # Đổ dữ liệu vào bảng
+        for item in data:
+            tree.insert("", "end", values=item)
+        sharefile.protocol("WM_DELETE_WINDOW", close_window)
+
+        sharefile.mainloop()
 
 
 class ChatPage(tk.Frame):
