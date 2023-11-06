@@ -11,3 +11,8 @@ $ python .\central_server.py
 ```bash
 $ python .\network_peer.py
 ```
+## Thành viên
+Phùng Ngọc Thức
+Phạm Thanh Tùng
+Nguyễn Khánh Huy
+Nguyễn Thành Danh
