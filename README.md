@@ -1,5 +1,4 @@
-# P2P_Share File CO3094
-Computer Network Project Semester 231.
+# P2P_Share File 
 
 ## Start server (backend)
 
