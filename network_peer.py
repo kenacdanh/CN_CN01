@@ -351,7 +351,7 @@ class PrivateChatPage(tk.Frame):
 
         tk.Label(
             self,
-            bg="#573d9c",
+            bg="#0f743c",
             fg="#ffffff",
             text=friend_name,
             font="Helvetica 17 bold",
@@ -363,8 +363,8 @@ class PrivateChatPage(tk.Frame):
             self,
             image=chatroom_icon,
             border=0,
-            background="#573d9c",
-            activebackground="#573d9c",
+            background="#0f743c",
+            activebackground="#0f743c",
             command=lambda: self.open_chatroom(),
         )
         chatroom_button.image = chatroom_icon
@@ -375,8 +375,8 @@ class PrivateChatPage(tk.Frame):
             self,
             image=public_icon,
             border=0,
-            background="#573d9c",
-            activebackground="#573d9c",
+            background="#0f743c",
+            activebackground="#0f743c",
             command=lambda: self.sendPublicFile(directory_path_sharefile),
         )
         public_icon_button.image = public_icon
@@ -410,7 +410,7 @@ class PrivateChatPage(tk.Frame):
             width=6,
             height=1,
             pady=5,
-            bg="#462d86",
+            bg="#0f743c",
             fg="#ffffff",
             font="Helvetica 14 bold",
             command=lambda: self.sendText(str(self.entry_msg.get())),
@@ -423,7 +423,7 @@ class PrivateChatPage(tk.Frame):
             height=1,
             pady=5,
             bg="#ffffff",
-            fg="#462d86",
+            fg="#0f743c",
             font="Helvetica 14 bold",
             command=lambda friend=friend_name: self.sendFile(friend),
         ).grid(row=2, column=2, sticky="news")
@@ -661,7 +661,7 @@ class ChatPage(tk.Frame):
         request_label = tk.Label(
             self.f3,
             text="Request For Chat",
-            bg="#8372f2",
+            bg="#29e37d",
             fg="#e6e6fa",
             font="Helvetica 13 bold",
             pady=5,
@@ -675,7 +675,7 @@ class ChatPage(tk.Frame):
             self.f3,
             image=logout_icon,
             border=0,
-            background="#8372f2",
+            background="#29e37d",
             activebackground="#6a54f7",
             command=lambda: self.log_out(),
         )
@@ -688,7 +688,7 @@ class ChatPage(tk.Frame):
         wrapper.grid_columnconfigure(0, weight=1)
         wrapper.grid_rowconfigure(0, weight=1)
 
-        mycanvas = tk.Canvas(wrapper, background="#f0f0ff", width=1)
+        mycanvas = tk.Canvas(wrapper, background="#c5f7dc", width=1)
         mycanvas.grid(row=0, column=0, sticky="news")
 
         yscrollbar = tk.Scrollbar(wrapper, orient="vertical", command=mycanvas.yview)
@@ -709,7 +709,7 @@ class ChatPage(tk.Frame):
             online_frame,
             image=reload_icon,
             border=0,
-            background="#f0f0ff",
+            background="#c5f7dc",
             activebackground="#eeedff",
             command=lambda: self.update_online_user_list(),
         )
@@ -719,15 +719,15 @@ class ChatPage(tk.Frame):
         tk.Label(
             online_frame,
             text="Update",
-            background="#f0f0ff",
+            background="#c5f7dc",
             pady=25,
             font="Helvetica 15 bold",
         ).grid(row=0, column=1, sticky="news")
 
         request_img = ImageTk.PhotoImage(asset.request_image)
         self.user_name_frame = []
-        for i in range(1, 100):
-            user_img = tk.Label(online_frame, image=request_img, background="#f0f0ff")
+        for i in range(1, 10):
+            user_img = tk.Label(online_frame, image=request_img, background="#c5f7dc")
             user_img.grid(row=i, column=0, sticky="news")
             user_img.image = request_img
 
@@ -736,10 +736,10 @@ class ChatPage(tk.Frame):
                 text="Load to see...",
                 width=12,
                 pady=20,
-                background="#f0f0ff",
+                background="#c5f7dc",
                 activebackground="#eeedff",
                 border=0,
-                highlightcolor="#f0f0ff",
+                highlightcolor="#c5f7dc",
                 font="Helvetica 10",
                 fg="#1b142c",
             )
@@ -753,7 +753,7 @@ class ChatPage(tk.Frame):
         send_label = tk.Label(
             self.f1,
             text="My Friend List",
-            bg="#cca3ff",
+            bg="#6feba8",
             fg="#7f00ff",
             font="Helvetica 13 bold",
             pady=5,
@@ -768,7 +768,7 @@ class ChatPage(tk.Frame):
         wrapper_2.grid_columnconfigure(0, weight=1)
         wrapper_2.grid_rowconfigure(0, weight=1)
 
-        mycanvas_2 = tk.Canvas(wrapper_2, background="#f1e8fc", width=1)
+        mycanvas_2 = tk.Canvas(wrapper_2, background="#e8fcf1", width=1)
         mycanvas_2.grid(row=0, column=0, sticky="news")
 
         yscrollbar_2 = tk.Scrollbar(
@@ -789,7 +789,7 @@ class ChatPage(tk.Frame):
             friend_frame,
             image=reload_icon,
             border=0,
-            background="#f1e8fc",
+            background="#e8fcf1",
             activebackground="#eee3fa",
             command=lambda: self.update_friend_list(),
         )
@@ -799,16 +799,16 @@ class ChatPage(tk.Frame):
         tk.Label(
             friend_frame,
             text="Update",
-            background="#f1e8fc",
+            background="#e8fcf1",
             pady=25,
             font="Helvetica 15 bold",
         ).grid(row=0, column=1, sticky="news")
 
         friend_img = ImageTk.PhotoImage(asset.friend_image)
         self.friend_name_frame = []
-        for i in range(1, 100):
+        for i in range(1, 10):
             friend_img_container = tk.Label(
-                friend_frame, image=friend_img, background="#f1e8fc"
+                friend_frame, image=friend_img, background="#e8fcf1"
             )
             friend_img_container.image = friend_img
             friend_img_container.grid(row=i, column=0, sticky="news", ipadx=10)
@@ -818,10 +818,10 @@ class ChatPage(tk.Frame):
                 text="Load to see...",
                 width=12,
                 pady=20,
-                background="#f1e8fc",
+                background="#e8fcf1",
                 activebackground="#eee3fa",
                 border=0,
-                highlightcolor="#f0f0ff",
+                highlightcolor="#c5f7dc",
                 font="Helvetica 10",
                 fg="#1b142c",
             )
