@@ -12,7 +12,7 @@ $ python .\central_server.py
 $ python .\network_peer.py
 ```
 ## Thành viên
-Phùng Ngọc Thức
-Phạm Thanh Tùng
-Nguyễn Khánh Huy
-Nguyễn Thành Danh
+Phùng Ngọc Thức\n
+Phạm Thanh Tùng\n
+Nguyễn Khánh Huy\n
+Nguyễn Thành Danh\n
